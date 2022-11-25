@@ -1,26 +1,63 @@
-// import section
+
 import { products } from "../data/products";
 import { useState } from "react";
 
 const StateSample7 = () => {
-  // useState Sections
+
   const [productList, setProductList] = useState(products);
   const [searchName, setSearchName] = useState("");
+  const [price, setPrice] = useState({
+    minPrice: 0,
+    maxPrice: 0,
+  });
 
-// arrow fonction section
   const searchProducts = () => {
-    setProductList(prev => {
-        return prev.filter(q => q.name.startsWith(searchName))
-    })
+    const _searchName = searchName.toLowerCase().trim();
+    const filteredData = products.filter((q) =>
+      q.name.toLowerCase().trim().startsWith(_searchName)
+    );
+    setProductList([...filteredData]);
+  };
+
+  const getProduct = () =>{
+    console.log("min price",price.minPrice);
+    console.log("max price",price.maxPrice);
+    
   }
 
-  // return section
+
   return (
     <>
       <div>
-        <label htmlFor="">Search:</label>
+        <label htmlFor="">Search: </label>
         <input type="text" onChange={(e) => setSearchName(e.target.value)} />
         <button onClick={searchProducts}>Search</button>
+      </div>
+
+      <div>
+        <label htmlFor="">Min Price</label>
+        <input
+          type="text"
+          onChange={(e) =>
+            setPrice((prev) => {
+              return { ...prev, minPrice: e.target.value };
+            })
+          }
+        />
+      </div>
+      <div>
+        <label htmlFor="">Max Price</label>
+        <input
+          type="text"
+          onChange={(e) =>
+            setPrice((prev) => {
+              return { ...prev, maxPrice: e.target.value };
+            })
+          }
+        />
+      </div>
+      <div>
+        <button onClick={getProduct}>get</button>
       </div>
       <table>
         <tr>

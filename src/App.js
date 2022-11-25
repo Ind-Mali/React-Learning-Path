@@ -1,10 +1,10 @@
-import StateSample7 from "./state/StateSample7";
+import TodoApp from "./state/TodoApp";
 
 
 function App() {
   return (
     <>
-    <StateSample7/>
+    <TodoApp/>
 
     </>
   );
